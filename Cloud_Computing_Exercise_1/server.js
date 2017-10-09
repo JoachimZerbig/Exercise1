@@ -1,5 +1,3 @@
-//https://www.youtube.com/watch?v=k8o8-Q_-Qfk&t=768s
-
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -50,7 +48,12 @@ io.sockets.on('connection', function(socket){
 				callback('The private message cannot be empty');
 			}
 			
-		}else{
+		}
+		else if(msg.substring(0,5) == '/list'){
+			var socketid = socket.id;
+			io.to(socketid).emit('user list', {list: Object.keys(users)});
+		}
+		else{
 			io.sockets.emit('new message', {msg: msg, user: socket.nickname, timestamp: new Date(Date.now()).toUTCString()});
 		}
 	});

@@ -83,11 +83,16 @@ body{
 			});
 			
 			socket.on('new user enlisted', function(data){
-				$chat.append('<div class="well" style="background:green; color:white"><strong>' + data.user + '</strong> joined the chatroom');
+				$chat.append('<div class="well" style="background:green; color:white"><strong>' + data.user + '</strong> joined the chatroom</div>');
 			});
 			
 			socket.on('user left', function(data){
-				$chat.append('<div class="well" style="background:red; color:white"><strong>' + data.user + '</strong> left the chatroom');
+				$chat.append('<div class="well" style="background:red; color:white"><strong>' + data.user + '</strong> left the chatroom</div>');
+			});
+			
+			
+			socket.on('user list', function(data){
+				$chat.append('<div class="well" style="background:purple; color:white">Userlist: <strong><p>' + data.list + '</p></strong></div>');
 			});
 			
 			
