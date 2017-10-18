@@ -2,10 +2,14 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+
+var portNumber = 3000;
+
+
 users = {};
 connections = [];
 
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || portNumber);
 console.log('Server running...');
 
 app.get('/', function(req, res){
@@ -38,8 +42,7 @@ io.sockets.on('connection', function(socket){
 				var name = msg.substring(0, i);
 				var msg = msg.substring(i + 1);
 				if(name in users){
-					users[name].emit('private message', {msg: msg, user: socket.nickname, timestamp: new Date(Date.now()).toUTCString()});
-					
+					io.sockets.emit('new message', {msg: msg, user: socket.nickname, timestamp: new Date(Date.now()).toLocaleString('de-DE')});
 					console.log('private message');
 				} else {
 					callback('There is no user with such name. Please try again.');
@@ -54,7 +57,7 @@ io.sockets.on('connection', function(socket){
 			io.to(socketid).emit('user list', {list: Object.keys(users)});
 		}
 		else{
-			io.sockets.emit('new message', {msg: msg, user: socket.nickname, timestamp: new Date(Date.now()).toUTCString()});
+			io.sockets.emit('new message', {msg: msg, user: socket.nickname, timestamp: new Date(Date.now()).toLocaleString('de-DE')});
 		}
 	});
 	
