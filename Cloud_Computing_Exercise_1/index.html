@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Chatroom 3000</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Permanent+Marker" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 <style>
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 body{
 	margin-top: 30px;
 }
+#chatName{
+	font-family: 'Permanent Marker', cursive;
+	font-weight: normal;
+	text-align: center;
+	margin: 20px 0 40px 0;
+	font-size: 80px;
+	color: #000;
+}
 #messageArea{
 	display:none;
+}
+.well li{
+	margin: 10px;
 }
 </style>
 </head>
@@ -33,12 +47,23 @@ body{
 	
 	
 		<div id="messageArea" class="row">
-			<div class="col-md-4">
+			<h1 id="chatName">
+				C<span style="color: red">·</span>H<span style="color: aqua">·</span>A<span style="color: gold">·</span>T<span style="color: red">·</span>R<span style="color: gold">·</span>O<span style="color: aqua">·</span>O<span style="color: red">·</span>M
+			</h1>
+			<div class="col-md-3">
+				<ul class="well">
+					<li style="color:DeepSkyBlue;">private message</li>
+					<li style="color:green;">new user who joined the chat</li>
+					<li style="color:red;">user who left the chat</li>
+					<li style="color:purple;">list of current users</li>
+				</ul>
+			</div>
+			<!--div class="col-md-4">
 				<div class="well">
 					<h3>Online Users</h3>
 					<ul class="list-group" id="users"></ul>
 				</div>
-			</div>
+			</div-->
 			<div class="col-md-8">
 				<div class="chat" id="chat">
 					<form id="messageForm">
