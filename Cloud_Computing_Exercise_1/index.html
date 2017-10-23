@@ -57,13 +57,14 @@ body{
 					<li style="color:red;">user who left the chat</li>
 					<li style="color:purple;">list of current users</li>
 				</ul>
+				
+					<div class="well">
+						<h3>Online Users</h3>
+						<div class="list-group" id="users"></div>
+					</div>
+				
 			</div>
-			<!--div class="col-md-4">
-				<div class="well">
-					<h3>Online Users</h3>
-					<ul class="list-group" id="users"></ul>
-				</div>
-			</div-->
+			
 			<div class="col-md-8">
 				<div class="chat" id="chat">
 					<form id="messageForm">
@@ -139,7 +140,7 @@ body{
 			socket.on('get users', function(data){
 				var html = '';
 				for(i=0; i<data.length;i++){
-					html += '<li class="list-group-item">' + data[i] + '</li>';
+					html += '<div class="list-group-item">' + data[i] + '</div><br>';
 				}
 				$users.html(html);
 			});
