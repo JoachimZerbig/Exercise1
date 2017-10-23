@@ -12,6 +12,8 @@ connections = [];
 server.listen(process.env.PORT || portNumber);
 console.log('Server running...');
 
+app.use(express.static(__dirname + '/public'));
+
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
