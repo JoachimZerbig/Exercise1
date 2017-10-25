@@ -44,7 +44,8 @@ io.sockets.on('connection', function(socket){
 				var name = msg.substring(0, i);
 				var msg = msg.substring(i + 1);
 				if(name in users){
-					io.sockets.emit('new message', {msg: msg, user: socket.nickname, timestamp: new Date(Date.now()).toLocaleString('de-DE')});
+					users[name].emit('private message', {msg: msg, user: socket.nickname, timestamp: new Date(Date.now()).toUTCString()});
+					
 					console.log('private message');
 				} else {
 					callback('There is no user with such name. Please try again.');
@@ -59,7 +60,7 @@ io.sockets.on('connection', function(socket){
 			io.to(socketid).emit('user list', {list: Object.keys(users)});
 		}
 		else{
-			io.sockets.emit('new message', {msg: msg, user: socket.nickname, timestamp: new Date(Date.now()).toLocaleString('de-DE')});
+			io.sockets.emit('new message', {msg: msg, user: socket.nickname, timestamp: new Date(Date.now()).toUTCString()});
 		}
 	});
 	
