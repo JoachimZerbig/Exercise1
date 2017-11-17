@@ -3,7 +3,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
-var portNumber = 3000;
+var portNumber = process.env.PORT || 3000;
 
 
 users = {};
